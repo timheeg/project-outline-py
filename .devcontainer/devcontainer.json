@@ -1,0 +1,37 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.base.schema.json",
+  "name": "project-py",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "BASE_IMAGE_NAME": "registry.access.redhat.com/ubi8/ubi",
+      "BASE_IMAGE_TAG": "8.10-1054",
+      "USERNAME": "${localEnv:USER}"
+    },
+    "options": [
+      "--secret=id=RHEL8_ORG",
+      "--secret=id=RHEL8_ACTIVATION_KEY"
+    ],
+    "runArgs": [
+      "--pull=never"
+    ]
+  },
+  "mounts": [
+    // Copy build environment gitconfig into dev container.
+    // This comes from WSL config containing common settings and user config.
+    "source=/etc/gitconfig,target=/etc/gitconfig,type=bind"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bierner.markdown-mermaid",
+        "davidanson.vscode-markdownlint",
+        "eamodio.gitlens",
+        "redhat.vscode-yaml",
+        "streetsidesoftware.code-spell-checker",
+        "stkb.rewrap",
+        "timonwong.shellcheck"
+      ]
+    }
+  }
+}
